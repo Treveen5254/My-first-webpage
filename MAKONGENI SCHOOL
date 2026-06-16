@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Makongeni High School · data hub</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background: #f4f7fc;
+      color: #0b1a2e;
+      line-height: 1.5;
+      padding: 1.5rem;
+    }
+
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 2rem;
+      box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.08);
+      padding: 2rem 2.2rem;
+    }
+
+    /* header */
+    .header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #e9edf4;
+      padding-bottom: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .school-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .school-brand i {
+      font-size: 2.5rem;
+      color: #1d4ed8;
+      background: #dbeafe;
+      padding: 0.6rem;
+      border-radius: 18px;
+    }
+
+    .school-brand h1 {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .school-brand h1 span {
+      color: #1d4ed8;
+    }
+
+    .badge-github {
+      background: #0d1117;
+      color: white;
+      padding: 0.4rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: 1px solid #2d3748;
+    }
+
+    .badge-github i {
+      font-size: 1rem;
+    }
+
+    /* quick stats */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .stat-card {
+      background: #f8faff;
+      padding: 1rem 1.2rem;
+      border-radius: 1.5rem;
+      border: 1px solid #eef2f8;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .stat-card i {
+      font-size: 1.8rem;
+      color: #2563eb;
+      background: white;
+      padding: 0.5rem;
+      border-radius: 14px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+    }
+
+    .stat-card .info .number {
+      font-weight: 700;
+      font-size: 1.4rem;
+      color: #0b1a2e;
+    }
+
+    .stat-card .info .label {
+      color: #475569;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    /* main data panels */
+    .panel-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (max-width: 800px) {
+      .panel-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel {
+      background: #fafcff;
+      border-radius: 1.8rem;
+      padding: 1.5rem 1.8rem;
+      border: 1px solid #eef2f8;
+    }
+
+    .panel h3 {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-weight: 600;
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+      color: #0b1a2e;
+    }
+
+    .panel h3 i {
+      color: #2563eb;
+    }
+
+    .student-item, .staff-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid #eef2f8;
+      font-size: 0.95rem;
+    }
+
+    .student-item:last-child, .staff-item:last-child {
+      border-bottom: none;
+    }
+
+    .student-name {
+      font-weight: 500;
+    }
+
+    .student-class {
+      background: #e9edf4;
+      padding: 0.1rem 0.8rem;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    .staff-role {
+      color: #475569;
+      font-size: 0.85rem;
+    }
+
+    .more-link {
+      display: inline-block;
+      margin-top: 0.8rem;
+      color: #2563eb;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .more-link i {
+      transition: 0.2s;
+    }
+
+    .more-link:hover i {
+      transform: translateX(4px);
+    }
+
+    /* attendance / records table */
+    .records-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+
+    .records-table th {
+      text-align: left;
+      padding: 0.6rem 0.3rem;
+      font-weight: 600;
+      color: #334155;
+      border-bottom: 1px solid #dce2ec;
+    }
+
+    .records-table td {
+      padding: 0.6rem 0.3rem;
+      border-bottom: 1px solid #eef2f8;
+    }
+
+    .records-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 0.1rem 0.7rem;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .status-badge.present { background: #dcfce7; color: #166534; }
+    .status-badge.absent { background: #fee2e2; color: #991b1b; }
+    .status-badge.late { background: #fef3c7; color: #92400e; }
+
+    .action-icon {
+      color: #64748b;
+      margin: 0 0.2rem;
+      transition: 0.2s;
+      cursor: default;
+    }
+
+    .action-icon:hover {
+      color: #2563eb;
+    }
+
+    /* GitHub sync / access section */
+    .github-section {
+      background: #f1f5f9;
+      border-radius: 2rem;
+      padding: 1.5rem 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin: 2rem 0 1rem;
+    }
+
+    .github-section .left {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+    }
+
+    .github-section .left i {
+      font-size: 2.2rem;
+      color: #0d1117;
+    }
+
+    .github-section .left div {
+      font-weight: 500;
+    }
+
+    .github-section .left div small {
+      font-weight: 400;
+      color: #475569;
+      display: block;
+      font-size: 0.8rem;
+    }
+
+    .github-btn {
+      background: #0d1117;
+      color: white;
+      border: none;
+      padding: 0.6rem 1.8rem;
+      border-radius: 40px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: 0.2s;
+      cursor: default;
+      border: 1px solid #2d3748;
+    }
+
+    .github-btn i {
+      font-size: 1.1rem;
+    }
+
+    /* footer */
+    .footer {
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid #e9edf4;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      color: #475569;
+      font-size: 0.9rem;
+    }
+
+    .footer-links i {
+      margin-left: 1.2rem;
+      color: #64748b;
+      transition: 0.2s;
+      cursor: default;
+    }
+
+    .footer-links i:hover {
+      color: #1d4ed8;
+    }
+
+    /* responsive */
+    @media (max-width: 600px) {
+      .container {
+        padding: 1rem;
+      }
+      .header {
+        flex-direction: column;
+        align-items: start;
+        gap: 0.8rem;
+      }
+      .github-section {
+        flex-direction: column;
+        align-items: start;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+
+  <!-- header: school name + github badge -->
+  <div class="header">
+    <div class="school-brand">
+      <i class="fas fa-school"></i>
+      <h1>Makongeni <span>High School</span></h1>
+    </div>
+    <div class="badge-github">
+      <i class="fab fa-github"></i> GitHub · easy access
+    </div>
+  </div>
+
+  <!-- quick data stats -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <i class="fas fa-user-graduate"></i>
+      <div class="info">
+        <div class="number">482</div>
+        <div class="label">students</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <i class="fas fa-chalkboard-teacher"></i>
+      <div class="info">
+        <div class="number">34</div>
+        <div class="label">staff</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <i class="fas fa-calendar-check"></i>
+      <div class="info">
+        <div class="number">91%</div>
+        <div class="label">attendance</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <i class="fas fa-book-open"></i>
+      <div class="info">
+        <div class="number">8</div>
+        <div class="label">streams</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- main data panels: students + staff / records -->
+  <div class="panel-grid">
+    <!-- left: student list & staff -->
+    <div class="panel">
+      <h3><i class="fas fa-users"></i> students & staff</h3>
+      <div style="margin-bottom: 1.2rem;">
+        <div style="display: flex; justify-content: space-between; font-weight: 600; color: #334155; font-size: 0.8rem; padding-bottom: 0.3rem; border-bottom: 1px solid #dce2ec;">
+          <span>Name</span> <span>Class</span>
+        </div>
+        <div class="student-item"><span class="student-name">Amina Juma</span> <span class="student-class">Form 4A</span></div>
+        <div class="student-item"><span class="student-name">Brian Ochieng</span> <span class="student-class">Form 3B</span></div>
+        <div class="student-item"><span class="student-name">Cynthia Muthoni</span> <span class="student-class">Form 2C</span></div>
+        <div class="student-item"><span class="student-name">David Kiprop</span> <span class="student-class">Form 1A</span></div>
+        <div class="student-item"><span class="student-name">Eva Wanjiru</span> <span class="student-class">Form 4B</span></div>
+        <a href="#" class="more-link">view all students <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div style="margin-top: 1.5rem;">
+        <div style="display: flex; justify-content: space-between; font-weight: 600; color: #334155; font-size: 0.8rem; padding-bottom: 0.3rem; border-bottom: 1px solid #dce2ec;">
+          <span>Staff</span> <span>Role</span>
+        </div>
+        <div class="staff-item"><span>Mr. Otieno</span> <span class="staff-role">Principal</span></div>
+        <div class="staff-item"><span>Ms. Akinyi</span> <span class="staff-role">Deputy</span></div>
+        <div class="staff-item"><span>Mr. Mwangi</span> <span class="staff-role">Math HOD</span></div>
+        <div class="staff-item"><span>Mrs. Atieno</span> <span class="staff-role">English</span></div>
+        <a href="#" class="more-link">view all staff <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+
+    <!-- right: attendance records & actions -->
+    <div class="panel">
+      <h3><i class="fas fa-clipboard-list"></i> today's records</h3>
+      <table class="records-table">
+        <thead>
+          <tr><th>Student</th><th>Status</th><th></th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Amina Juma</td><td><span class="status-badge present">present</span></td><td><i class="fas fa-edit action-icon"></i></td></tr>
+          <tr><td>Brian Ochieng</td><td><span class="status-badge absent">absent</span></td><td><i class="fas fa-edit action-icon"></i></td></tr>
+          <tr><td>Cynthia Muthoni</td><td><span class="status-badge present">present</span></td><td><i class="fas fa-edit action-icon"></i></td></tr>
+          <tr><td>David Kiprop</td><td><span class="status-badge late">late</span></td><td><i class="fas fa-edit action-icon"></i></td></tr>
+          <tr><td>Eva Wanjiru</td><td><span class="status-badge present">present</span></td><td><i class="fas fa-edit action-icon"></i></td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top: 1rem; display: flex; gap: 0.8rem; flex-wrap: wrap;">
+        <span style="background: #eef2f8; padding: 0.2rem 0.8rem; border-radius: 40px; font-size: 0.75rem;"><i class="fas fa-check-circle" style="color:#16a34a;"></i> 78% present</span>
+        <span style="background: #eef2f8; padding: 0.2rem 0.8rem; border-radius: 40px; font-size: 0.75rem;"><i class="fas fa-clock" style="color:#d97706;"></i> 12% late</span>
+        <span style="background: #eef2f8; padding: 0.2rem 0.8rem; border-radius: 40px; font-size: 0.75rem;"><i class="fas fa-times-circle" style="color:#dc2626;"></i> 10% absent</span>
+      </div>
+      <a href="#" class="more-link" style="margin-top: 1.2rem;">update attendance <i class="fas fa-pen"></i></a>
+    </div>
+  </div>
+
+  <!-- additional data: fee balance / upcoming events (quick) -->
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; margin: 1.5rem 0 2rem;">
+    <div style="background: #f8faff; border-radius: 1.5rem; padding: 1rem 1.5rem; border: 1px solid #eef2f8;">
+      <i class="fas fa-coins" style="color: #2563eb; font-size: 1.4rem;"></i>
+      <div style="font-weight: 600; margin-top: 0.4rem;">Fee balance</div>
+      <div style="font-size: 1.6rem; font-weight: 700;">Ksh 342,800</div>
+      <small style="color: #475569;">85% clearance</small>
+    </div>
+    <div style="background: #f8faff; border-radius: 1.5rem; padding: 1rem 1.5rem; border: 1px solid #eef2f8;">
+      <i class="fas fa-calendar-alt" style="color: #2563eb; font-size: 1.4rem;"></i>
+      <div style="font-weight: 600; margin-top: 0.4rem;">Upcoming</div>
+      <div style="font-weight: 500;">Sports day · Fri</div>
+      <small style="color: #475569;">Parent meeting 24 Jun</small>
+    </div>
+    <div style="background: #f8faff; border-radius: 1.5rem; padding: 1rem 1.5rem; border: 1px solid #eef2f8;">
+      <i class="fas fa-chart-bar" style="color: #2563eb; font-size: 1.4rem;"></i>
+      <div style="font-weight: 600; margin-top: 0.4rem;">Exams</div>
+      <div style="font-weight: 500;">Term 2 begins</div>
+      <small style="color: #475569;">3 weeks to midterms</small>
+    </div>
+  </div>
+
+  <!-- GitHub access / data sync section -->
+  <div class="github-section">
+    <div class="left">
+      <i class="fab fa-github"></i>
+      <div>
+        <span>📂 data stored & synced with GitHub</span>
+        <small>easy access · version control · collaborative</small>
+      </div>
+    </div>
+    <div class="github-btn">
+      <i class="fab fa-github"></i> view on GitHub
+    </div>
+  </div>
+
+  <!-- footer -->
+  <div class="footer">
+    <div>
+      <i class="fas fa-school" style="color: #1d4ed8; margin-right: 0.4rem;"></i> 
+      Makongeni High School · data hub
+      <span style="margin-left: 1.2rem; color: #94a3b8;">v1.0</span>
+    </div>
+    <div class="footer-links">
+      <i class="fas fa-database"></i>
+      <i class="fas fa-cloud-upload-alt"></i>
+      <i class="fab fa-github"></i>
+      <i class="fas fa-share-alt"></i>
+    </div>
+  </div>
+
+  <!-- small badge: github ready -->
+  <div style="margin-top: 1rem; text-align: right; font-size: 0.75rem; color: #94a3b8;">
+    <i class="fas fa-code-branch"></i> ready for GitHub Pages · data stored locally
+  </div>
+</div>
+</body>
+</html>
