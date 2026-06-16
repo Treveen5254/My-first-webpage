@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Track Traders · market your goods</title>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body {
+      background: #f8fafc;
+      color: #0b1a2e;
+      line-height: 1.5;
+    }
+
+    /* active vibe – "Track Traders" brand */
+    .container {
+      max-width: 1300px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* header / nav */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.2rem 0;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-size: 1.9rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .logo i {
+      color: #2563eb;
+      font-size: 2rem;
+    }
+
+    .logo span {
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #1e293b;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: #2563eb;
+    }
+
+    .btn-outline {
+      border: 1.5px solid #2563eb;
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      color: #2563eb;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: #2563eb;
+      color: white !important;
+    }
+
+    .btn-primary {
+      background: #2563eb;
+      color: white !important;
+      padding: 0.5rem 1.5rem;
+      border-radius: 40px;
+      font-weight: 600;
+      border: none;
+      transition: 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+      transform: scale(1.02);
+    }
+
+    /* hero */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      padding: 3.5rem 0 2.5rem;
+      gap: 2rem;
+    }
+
+    .hero-content {
+      flex: 1 1 400px;
+    }
+
+    .hero-content h1 {
+      font-size: 3.3rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-content h1 i {
+      color: #2563eb;
+      font-size: 2.8rem;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      color: #334155;
+      max-width: 500px;
+      margin-bottom: 2rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .hero-actions .btn-primary {
+      padding: 0.9rem 2.2rem;
+      font-size: 1.1rem;
+    }
+
+    .hero-actions .btn-outline {
+      padding: 0.9rem 2.2rem;
+      font-size: 1.1rem;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .hero-stats div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-stats .number {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #0b1a2e;
+    }
+
+    .hero-stats .label {
+      color: #475569;
+      font-size: 0.9rem;
+    }
+
+    .hero-image {
+      flex: 1 1 350px;
+      background: linear-gradient(145deg, #dbeafe, #ede9fe);
+      border-radius: 2.5rem;
+      padding: 2.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-image i {
+      font-size: 4.5rem;
+      color: #2563eb;
+      background: white;
+      padding: 1.2rem;
+      border-radius: 60px;
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.15);
+    }
+
+    .hero-image h3 {
+      margin-top: 1.2rem;
+      font-weight: 600;
+      font-size: 1.5rem;
+    }
+
+    .hero-image p {
+      color: #334155;
+      text-align: center;
+      margin-top: 0.2rem;
+    }
+
+    /* featured section – "active marketplace" */
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin: 3rem 0 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .section-title i {
+      color: #2563eb;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 2rem;
+      margin: 1.5rem 0 3rem;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 1.8rem;
+      padding: 1.5rem 1.2rem 1.8rem;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.02);
+      transition: all 0.25s ease;
+      border: 1px solid rgba(0, 0, 0, 0.02);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 30px -12px rgba(37, 99, 235, 0.12);
+      border-color: #bfdbfe;
+    }
+
+    .product-icon {
+      background: #eff6ff;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      font-size: 2rem;
+      color: #2563eb;
+      margin-bottom: 1rem;
+    }
+
+    .product-card h4 {
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    .product-card .desc {
+      color: #475569;
+      font-size: 0.95rem;
+      margin: 0.3rem 0 0.8rem;
+      flex: 1;
+    }
+
+    .product-card .price {
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: #0b1a2e;
+      margin-top: 0.3rem;
+    }
+
+    .product-card .tag {
+      background: #dbeafe;
+      color: #1e40af;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.8rem;
+      border-radius: 40px;
+      align-self: flex-start;
+      margin-top: 0.5rem;
+      letter-spacing: 0.3px;
+    }
+
+    .card-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 1.2rem;
+      border-top: 1px solid #eef2f6;
+      padding-top: 1rem;
+    }
+
+    .card-actions a {
+      color: #2563eb;
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+
+    .card-actions a i {
+      margin-left: 0.4rem;
+      transition: 0.2s;
+    }
+
+    .card-actions a:hover i {
+      transform: translateX(4px);
+    }
+
+    .card-actions .like {
+      color: #94a3b8;
+      transition: 0.2s;
+      cursor: default;
+    }
+
+    .card-actions .like i {
+      margin-right: 0.2rem;
+    }
+
+    /* tracking / active status */
+    .active-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: #dcfce7;
+      color: #166534;
+      font-weight: 600;
+      font-size: 0.8rem;
+      padding: 0.25rem 0.9rem;
+      border-radius: 40px;
+      margin-bottom: 0.5rem;
+    }
+
+    .active-badge i {
+      font-size: 0.6rem;
+      color: #16a34a;
+    }
+
+    /* CTA section */
+    .cta-section {
+      background: linear-gradient(135deg, #eff6ff, #f5f3ff);
+      border-radius: 3rem;
+      padding: 3rem 2.5rem;
+      margin: 4rem 0 3rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cta-text h2 {
+      font-size: 2.2rem;
+      font-weight: 700;
+    }
+
+    .cta-text p {
+      color: #334155;
+      max-width: 400px;
+      margin-top: 0.3rem;
+    }
+
+    .cta-btn .btn-primary {
+      padding: 0.9rem 2.8rem;
+      font-size: 1.1rem;
+      box-shadow: 0 8px 18px rgba(37, 99, 235, 0.25);
+    }
+
+    /* footer */
+    footer {
+      border-top: 1px solid #e2e8f0;
+      padding: 2rem 0 1.5rem;
+      margin-top: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      color: #475569;
+    }
+
+    .footer-social i {
+      font-size: 1.4rem;
+      margin-left: 1.2rem;
+      color: #64748b;
+      transition: 0.2s;
+      cursor: default;
+    }
+
+    .footer-social i:hover {
+      color: #2563eb;
+    }
+
+    /* responsive */
+    @media (max-width: 700px) {
+      .navbar {
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+      .cta-section {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- header -->
+    <nav class="navbar">
+      <div class="logo">
+        <i class="fas fa-route"></i>
+        <span>Track Traders</span>
+      </div>
+      <div class="nav-links">
+        <a href="#">Marketplace</a>
+        <a href="#">Track</a>
+        <a href="#">Sell</a>
+        <a href="#">Community</a>
+        <a href="#" class="btn-outline"><i class="fas fa-user"></i> Sign in</a>
+        <a href="#" class="btn-primary">List your goods</a>
+      </div>
+    </nav>
+
+    <!-- hero -->
+    <section class="hero">
+      <div class="hero-content">
+        <div class="active-badge">
+          <i class="fas fa-circle"></i> active · 2,341 traders online
+        </div>
+        <h1>
+          <i class="fas fa-box-open"></i> Market your goods <br>with <span style="color: #2563eb;">Track Traders</span>
+        </h1>
+        <p>
+          Reach thousands of active buyers. List, track, and sell — all in one 
+          vibrant marketplace built for modern traders.
+        </p>
+        <div class="hero-actions">
+          <a href="#" class="btn-primary"><i class="fas fa-plus-circle"></i> Start selling</a>
+          <a href="#" class="btn-outline"><i class="fas fa-store"></i> Explore goods</a>
+        </div>
+        <div class="hero-stats">
+          <div><span class="number">12.4k</span><span class="label">active listings</span></div>
+          <div><span class="number">4.8k</span><span class="label">sold today</span></div>
+          <div><span class="number">97%</span><span class="label">satisfaction</span></div>
+        </div>
+      </div>
+      <div class="hero-image">
+        <i class="fas fa-chart-line"></i>
+        <h3>🚀 live market pulse</h3>
+        <p>Real-time tracking &amp; insights for your goods</p>
+        <div style="display: flex; gap: 1.5rem; margin-top: 1.5rem;">
+          <div><span style="font-weight: 700; color:#1e293b;">+18%</span> <span style="color:#475569;">views</span></div>
+          <div><span style="font-weight: 700; color:#1e293b;">+7%</span> <span style="color:#475569;">sales</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- featured goods / active listings -->
+    <div class="section-title">
+      <i class="fas fa-bolt"></i> trending now · active goods
+    </div>
+
+    <div class="product-grid">
+      <!-- card 1 -->
+      <div class="product-card">
+        <div class="product-icon"><i class="fas fa-laptop"></i></div>
+        <h4>MacBook Pro M3</h4>
+        <div class="desc">Space gray, 16GB RAM, 1TB SSD – mint condition</div>
+        <div class="price">$1,899</div>
+        <span class="tag"><i class="fas fa-circle" style="color:#22c55e; font-size: 0.5rem; margin-right: 4px;"></i> 12 offers</span>
+        <div class="card-actions">
+          <a href="#">View <i class="fas fa-arrow-right"></i></a>
+          <span class="like"><i class="far fa-heart"></i> 34</span>
+        </div>
+      </div>
+
+      <!-- card 2 -->
+      <div class="product-card">
+        <div class="product-icon"><i class="fas fa-headphones"></i></div>
+        <h4>Sony WH-1000XM5</h4>
+        <div class="desc">Noise cancelling, premium sound, like new</div>
+        <div class="price">$329</div>
+        <span class="tag"><i class="fas fa-circle" style="color:#22c55e; font-size: 0.5rem; margin-right: 4px;"></i> 8 offers</span>
+        <div class="card-actions">
+          <a href="#">View <i class="fas fa-arrow-right"></i></a>
+          <span class="like"><i class="far fa-heart"></i> 19</span>
+        </div>
+      </div>
+
+      <!-- card 3 -->
+      <div class="product-card">
+        <div class="product-icon"><i class="fas fa-couch"></i></div>
+        <h4>Mid-century sofa</h4>
+        <div class="desc">Velvet green, solid wood frame, excellent condition</div>
+        <div class="price">$720</div>
+        <span class="tag"><i class="fas fa-circle" style="color:#22c55e; font-size: 0.5rem; margin-right: 4px;"></i> 5 offers</span>
+        <div class="card-actions">
+          <a href="#">View <i class="fas fa-arrow-right"></i></a>
+          <span class="like"><i class="far fa-heart"></i> 42</span>
+        </div>
+      </div>
+
+      <!-- card 4 -->
+      <div class="product-card">
+        <div class="product-icon"><i class="fas fa-bicycle"></i></div>
+        <h4>Electric bike RadRover</h4>
+        <div class="desc">Fat tires, 750W motor, 40mi range, barely used</div>
+        <div class="price">$1,450</div>
+        <span class="tag"><i class="fas fa-circle" style="color:#22c55e; font-size: 0.5rem; margin-right: 4px;"></i> 3 offers</span>
+        <div class="card-actions">
+          <a href="#">View <i class="fas fa-arrow-right"></i></a>
+          <span class="like"><i class="far fa-heart"></i> 27</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA – market your goods -->
+    <div class="cta-section">
+      <div class="cta-text">
+        <h2><i class="fas fa-bullhorn" style="color:#2563eb;"></i> Ready to market your goods?</h2>
+        <p>Join thousands of active traders. List your products in minutes and start tracking sales in real time.</p>
+      </div>
+      <div class="cta-btn">
+        <a href="#" class="btn-primary"><i class="fas fa-upload"></i> List your goods now</a>
+      </div>
+    </div>
+
+    <!-- footer -->
+    <footer>
+      <div>
+        <span style="font-weight: 600; color: #0b1a2e;"><i class="fas fa-route" style="color:#2563eb;"></i> Track Traders</span>
+        <span style="margin-left: 1.5rem;">© 2026 · active marketplace</span>
+      </div>
+      <div class="footer-social">
+        <i class="fab fa-twitter"></i>
+        <i class="fab fa-instagram"></i>
+        <i class="fab fa-discord"></i>
+        <i class="fab fa-github"></i>
+      </div>
+    </footer>
+
+  </div>
+  <!-- tiny active badge – live indicator -->
+  <div style="position: fixed; bottom: 1.5rem; right: 1.5rem; background: white; border-radius: 60px; padding: 0.6rem 1.2rem; box-shadow: 0 8px 30px rgba(0,0,0,0.08); border: 1px solid #e2e8f0; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; font-weight: 500; backdrop-filter: blur(4px);">
+    <i class="fas fa-circle" style="color: #22c55e; font-size: 0.6rem;"></i> active · Track Traders live
+  </div>
+</body>
+</html>
